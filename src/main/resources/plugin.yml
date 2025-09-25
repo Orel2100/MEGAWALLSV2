@@ -4,6 +4,6 @@ main: com.megawallsffa.MegaWallsFFA
 api-version: 1.18
 commands:
   arena:
-    description: "Defines the arena boundaries."
-    usage: "/arena <pos1|pos2>"
+    description: "Manage the MegaWallsFFA arena."
+    usage: "/arena <pos1|pos2|addspawn|delspawn|listspawns>"
     permission: megawallsffa.admin

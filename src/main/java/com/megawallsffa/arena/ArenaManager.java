@@ -1,18 +1,25 @@
 package com.megawallsffa.arena;
 
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import com.megawallsffa.MegaWallsFFA;
+import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ArenaManager {
 
     private final MegaWallsFFA plugin;
+    private final Random random = new Random();
     private Location pos1;
     private Location pos2;
+    private final List<Location> spawnPoints = new ArrayList<>();
 
     public ArenaManager(MegaWallsFFA plugin) {
         this.plugin = plugin;
-        loadArena();
+        loadArenaData();
     }
 
     public void setPos1(Location pos1) {
@@ -27,20 +34,35 @@ public class ArenaManager {
         plugin.saveConfig();
     }
 
-    public Location getPos1() {
-        return pos1;
+    public void addSpawnPoint(Location location) {
+        spawnPoints.add(location);
+        plugin.getConfig().set("arena.spawns", spawnPoints);
+        plugin.saveConfig();
     }
 
-    public Location getPos2() {
-        return pos2;
+    public boolean removeSpawnPoint(int index) {
+        if (index >= 0 && index < spawnPoints.size()) {
+            spawnPoints.remove(index);
+            plugin.getConfig().set("arena.spawns", spawnPoints);
+            plugin.saveConfig();
+            return true;
+        }
+        return false;
     }
 
-    public boolean isArenaDefined() {
-        return pos1 != null && pos2 != null;
+    public List<Location> getSpawnPoints() {
+        return new ArrayList<>(spawnPoints);
+    }
+
+    public Location getRandomSpawnPoint() {
+        if (spawnPoints.isEmpty()) {
+            return null;
+        }
+        return spawnPoints.get(random.nextInt(spawnPoints.size()));
     }
 
     public boolean isWithinArena(Location location) {
-        if (!isArenaDefined()) {
+        if (pos1 == null || pos2 == null) {
             return false;
         }
         double minX = Math.min(pos1.getX(), pos2.getX());
@@ -55,13 +77,27 @@ public class ArenaManager {
                location.getZ() >= minZ && location.getZ() <= maxZ;
     }
 
-    private void loadArena() {
+    @SuppressWarnings("unchecked")
+    private void loadArenaData() {
         FileConfiguration config = plugin.getConfig();
+        plugin.saveDefaultConfig(); // Ensures config.yml exists
+
         if (config.contains("arena.pos1")) {
             pos1 = config.getLocation("arena.pos1");
         }
         if (config.contains("arena.pos2")) {
             pos2 = config.getLocation("arena.pos2");
+        }
+        if (config.contains("arena.spawns")) {
+            // Bukkit's config API saves a list of locations directly
+            List<?> rawList = config.getList("arena.spawns");
+            if (rawList != null) {
+                for (Object obj : rawList) {
+                    if (obj instanceof Location) {
+                        spawnPoints.add((Location) obj);
+                    }
+                }
+            }
         }
     }
 }

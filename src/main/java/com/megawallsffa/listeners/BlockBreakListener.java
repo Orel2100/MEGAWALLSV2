@@ -2,6 +2,7 @@ package com.megawallsffa.listeners;
 
 import com.megawallsffa.MegaWallsFFA;
 import com.megawallsffa.arena.ArenaManager;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -25,24 +26,32 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (arenaManager.isWithinArena(player.getLocation())) {
+        // Check if the action is within the defined arena boundaries
+        if (arenaManager.isWithinArena(block.getLocation())) {
             if (block.getType() == Material.IRON_ORE) {
-                // Handle ore respawning
-                event.setDropItems(false); // Don't drop the raw ore
+                // The block is iron ore, handle the custom respawn logic
+                event.setDropItems(false); // Prevent default drops
 
-                long respawnDelay = plugin.getConfig().getLong("ore.respawn-delay", 600L); // 30 seconds default
+                // Get the respawn delay from the config
+                long respawnDelay = plugin.getConfig().getLong("ore.respawn-delay", 600L);
 
-                block.setType(Material.STONE); // Temporary block
+                // Immediately replace the ore with a temporary block
+                block.setType(Material.STONE);
+
+                // Schedule the ore to respawn later
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        block.setType(Material.IRON_ORE); // Respawn ore
+                        block.setType(Material.IRON_ORE);
                     }
                 }.runTaskLater(plugin, respawnDelay);
 
+                // TODO: Add coin reward logic here in a future step.
+
             } else {
+                // The block is not iron ore, cancel the break event
                 event.setCancelled(true);
-                player.sendMessage("You can only break iron ore in the arena!");
+                player.sendMessage(ChatColor.RED + "You can only break Iron Ore in the arena!");
             }
         }
     }

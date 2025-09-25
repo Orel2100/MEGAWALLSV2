@@ -1,10 +1,17 @@
 # MegaWallsFFA Configuration
 
 # Arena settings
+# The 'pos1' and 'pos2' values define the cuboid region of the arena.
+# These are set in-game using the /arena pos1 and /arena pos2 commands.
 arena:
-  pos1: # First position of the arena
-  pos2: # Second position of the arena
+  pos1:
+  pos2:
+  # A list of spawn locations for players joining the arena.
+  # These are managed in-game using /arena addspawn and /arena delspawn.
+  spawns: []
 
 # Ore settings
 ore:
-  respawn-delay: 600 # Delay in ticks (20 ticks = 1 second)
+  # The time in ticks it takes for a mined iron ore to respawn.
+  # 20 ticks = 1 second. Default is 600 (30 seconds).
+  respawn-delay: 600

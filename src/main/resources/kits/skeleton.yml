@@ -1,0 +1,50 @@
+name: Skeleton
+eph:
+  melee: 0
+  bow: 20
+armor:
+  0:
+    - { material: LEATHER_BOOTS }
+  1:
+    - { material: LEATHER_BOOTS }
+    - { material: LEATHER_CHESTPLATE }
+  2:
+    - { material: CHAINMAIL_BOOTS }
+    - { material: CHAINMAIL_CHESTPLATE }
+  3:
+    - { material: IRON_BOOTS }
+    - { material: IRON_CHESTPLATE }
+  4:
+    - { material: IRON_BOOTS }
+    - { material: IRON_LEGGINGS }
+    - { material: IRON_CHESTPLATE }
+  5:
+    - { material: DIAMOND_BOOTS }
+    - { material: IRON_LEGGINGS }
+    - { material: IRON_CHESTPLATE }
+weapon:
+  0: { material: STONE_SWORD }
+  1: { material: STONE_SWORD }
+  2: { material: IRON_SWORD }
+  3: { material: IRON_SWORD }
+  4: { material: DIAMOND_SWORD }
+  5: { material: DIAMOND_SWORD }
+inventory:
+  0:
+    - { material: BOW }
+    - { material: ARROW, amount: 32 }
+  1:
+    - { material: BOW }
+    - { material: ARROW, amount: 48 }
+  2:
+    - { material: BOW }
+    - { material: ARROW, amount: 64 }
+  3:
+    - { material: BOW, enchantment: PUNCH_1 }
+    - { material: ARROW, amount: 64 }
+  4:
+    - { material: BOW, enchantment: PUNCH_1 }
+    - { material: ARROW, amount: 64 }
+  5:
+    - { material: BOW, enchantment: PUNCH_2 }
+    - { material: ARROW, amount: 64 }

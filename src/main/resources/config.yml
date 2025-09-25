@@ -1,23 +1,21 @@
 # MegaWallsFFA Configuration
 
-# Lobby settings
-# The location where players are sent after being eliminated.
-# This is set in-game using the /megawalls setlobby command.
-lobby:
-  location:
-
 # Arena settings
-# The 'pos1' and 'pos2' values define the cuboid region of the arena.
-# These are set in-game using the /arena pos1 and /arena pos2 commands.
 arena:
-  pos1:
-  pos2:
-  # A list of spawn locations for players joining the arena.
-  # These are managed in-game using /arena addspawn and /arena delspawn.
-  spawns: []
+  spawn:
+    world: world
+    x: 0.5
+    y: 101
+    z: 0.5
+    yaw: 0
+    pitch: 0
 
 # Ore settings
-ore:
-  # The time in ticks it takes for a mined iron ore to respawn.
-  # 20 ticks = 1 second. Default is 600 (30 seconds).
-  respawn-delay: 600
+ores:
+  respawn-timer: 45 # in seconds
+  locations:
+    - world;10;100;10;1 # world;x;y;z;tier
+    - world;20;100;20;2
+    - world;30;100;30;3
+    - world;40;100;40;4
+    - world;50;100;50;5

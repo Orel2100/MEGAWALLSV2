@@ -1,16 +1,13 @@
 name: MegaWallsFFA
 version: 1.0-SNAPSHOT
-main: com.megawallsffa.MegaWallsFFA
-api-version: 1.18
+main: com.github.megawallsffa.MegaWallsFFA
+author: Jules
+description: A Mega Walls FFA plugin.
 commands:
-  arena:
-    description: "Manage the MegaWallsFFA arena."
-    usage: "/arena <pos1|pos2|addspawn|delspawn|listspawns>"
-    permission: megawallsffa.admin
-  megawalls:
-    description: "General MegaWallsFFA commands."
-    usage: "/megawalls <setlobby>"
-    permission: megawallsffa.admin
-  class:
-    description: "Opens the class selector menu."
-    usage: "/class"
+  mwffa:
+    description: Main command for MegaWallsFFA.
+    usage: /<command> [args]
+    aliases: [mw]
+  kit:
+    description: Opens the kit selection menu.
+    aliases: [kits]

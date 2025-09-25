@@ -2,6 +2,7 @@ package com.megawallsffa.listeners;
 
 import com.megawallsffa.MegaWallsFFA;
 import com.megawallsffa.arena.ArenaManager;
+import com.megawallsffa.ui.ScoreboardManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,9 +16,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class LobbyListener implements Listener {
 
     private final ArenaManager arenaManager;
+    private final ScoreboardManager scoreboardManager;
 
     public LobbyListener(MegaWallsFFA plugin) {
         this.arenaManager = plugin.getArenaManager();
+        this.scoreboardManager = plugin.getScoreboardManager();
     }
 
     @EventHandler
@@ -38,6 +41,7 @@ public class LobbyListener implements Listener {
         if (spawnPoint != null) {
             player.teleport(spawnPoint);
             player.sendMessage(ChatColor.GREEN + "You have joined the MegaWalls FFA arena!");
+            scoreboardManager.setScoreboard(player);
         } else {
             player.sendMessage(ChatColor.RED + "The arena is not ready yet. No spawn points have been set.");
         }

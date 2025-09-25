@@ -1,5 +1,11 @@
 # MegaWallsFFA Configuration
 
+# Lobby settings
+# The location where players are sent after being eliminated.
+# This is set in-game using the /megawalls setlobby command.
+lobby:
+  location:
+
 # Arena settings
 # The 'pos1' and 'pos2' values define the cuboid region of the arena.
 # These are set in-game using the /arena pos1 and /arena pos2 commands.

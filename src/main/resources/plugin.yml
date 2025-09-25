@@ -7,3 +7,7 @@ commands:
     description: "Manage the MegaWallsFFA arena."
     usage: "/arena <pos1|pos2|addspawn|delspawn|listspawns>"
     permission: megawallsffa.admin
+  megawalls:
+    description: "General MegaWallsFFA commands."
+    usage: "/megawalls <setlobby>"
+    permission: megawallsffa.admin

@@ -1,0 +1,9 @@
+name: MegaWallsFFA
+version: 1.0-SNAPSHOT
+main: com.megawallsffa.MegaWallsFFA
+api-version: 1.18
+commands:
+  arena:
+    description: "Defines the arena boundaries."
+    usage: "/arena <pos1|pos2>"
+    permission: megawallsffa.admin

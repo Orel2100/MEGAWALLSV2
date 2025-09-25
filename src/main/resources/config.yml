@@ -1,0 +1,10 @@
+# MegaWallsFFA Configuration
+
+# Arena settings
+arena:
+  pos1: # First position of the arena
+  pos2: # Second position of the arena
+
+# Ore settings
+ore:
+  respawn-delay: 600 # Delay in ticks (20 ticks = 1 second)

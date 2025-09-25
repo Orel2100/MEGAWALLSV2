@@ -2,6 +2,8 @@ package com.megawallsffa.listeners;
 
 import com.megawallsffa.MegaWallsFFA;
 import com.megawallsffa.arena.ArenaManager;
+import com.megawallsffa.classes.EnergyManager;
+import com.megawallsffa.lobby.LobbyItemManager;
 import com.megawallsffa.lobby.LobbyManager;
 import com.megawallsffa.player.PlayerData;
 import com.megawallsffa.player.PlayerManager;
@@ -20,6 +22,8 @@ public class PlayerDeathListener implements Listener {
     private final PlayerManager playerManager;
     private final LobbyManager lobbyManager;
     private final ScoreboardManager scoreboardManager;
+    private final LobbyItemManager lobbyItemManager;
+    private final EnergyManager energyManager;
 
     public PlayerDeathListener(MegaWallsFFA plugin) {
         this.plugin = plugin;
@@ -27,6 +31,8 @@ public class PlayerDeathListener implements Listener {
         this.playerManager = plugin.getPlayerManager();
         this.lobbyManager = plugin.getLobbyManager();
         this.scoreboardManager = plugin.getScoreboardManager();
+        this.lobbyItemManager = plugin.getLobbyItemManager();
+        this.energyManager = plugin.getEnergyManager();
     }
 
     @EventHandler
@@ -47,8 +53,9 @@ public class PlayerDeathListener implements Listener {
         victimData.incrementDeaths();
         victimData.resetKillStreak();
 
-        // Remove the scoreboard from the victim
+        // Remove UI elements from the victim
         scoreboardManager.removeScoreboard(victim);
+        energyManager.removeEnergyBar(victim);
 
         // Teleport victim to lobby
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
@@ -56,10 +63,10 @@ public class PlayerDeathListener implements Listener {
             if (lobby != null) {
                 victim.teleport(lobby);
                 victim.sendMessage(ChatColor.YELLOW + "You were eliminated! Sent back to the lobby.");
+                lobbyItemManager.giveLobbyItems(victim); // Give lobby items
             } else {
                 victim.sendMessage(ChatColor.RED + "You were eliminated, but no lobby point is set!");
             }
-            // TODO: Reset player inventory/effects here
         }, 1L);
 
         if (killer != null && killer != victim) {

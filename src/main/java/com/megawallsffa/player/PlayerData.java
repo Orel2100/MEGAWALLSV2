@@ -1,5 +1,7 @@
 package com.megawallsffa.player;
 
+import com.megawallsffa.classes.MegaWallsClass;
+
 import java.util.UUID;
 
 public class PlayerData {
@@ -9,6 +11,7 @@ public class PlayerData {
     private int kills;
     private int deaths;
     private int killStreak;
+    private MegaWallsClass selectedClass;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
@@ -16,6 +19,7 @@ public class PlayerData {
         this.kills = 0;
         this.deaths = 0;
         this.killStreak = 0;
+        this.selectedClass = null; // Default to no class
     }
 
     // Getters
@@ -37,6 +41,10 @@ public class PlayerData {
 
     public int getKillStreak() {
         return killStreak;
+    }
+
+    public MegaWallsClass getSelectedClass() {
+        return selectedClass;
     }
 
     // Setters
@@ -67,5 +75,9 @@ public class PlayerData {
 
     public void resetKillStreak() {
         this.killStreak = 0;
+    }
+
+    public void setSelectedClass(MegaWallsClass selectedClass) {
+        this.selectedClass = selectedClass;
     }
 }

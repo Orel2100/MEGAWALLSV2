@@ -11,3 +11,6 @@ commands:
     description: "General MegaWallsFFA commands."
     usage: "/megawalls <setlobby>"
     permission: megawallsffa.admin
+  class:
+    description: "Opens the class selector menu."
+    usage: "/class"

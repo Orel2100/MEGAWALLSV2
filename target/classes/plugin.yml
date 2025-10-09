@@ -1,0 +1,13 @@
+name: MegaWallsFFA
+version: 1.0-SNAPSHOT
+main: com.github.megawallsffa.MegaWallsFFA
+author: Jules
+description: A Mega Walls FFA plugin.
+commands:
+  mwffa:
+    description: Main command for MegaWallsFFA.
+    usage: /<command> [args]
+    aliases: [mw]
+  kit:
+    description: Opens the kit selection menu.
+    aliases: [kits]

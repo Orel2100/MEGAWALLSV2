@@ -36,7 +36,14 @@ public class LobbyManager {
      */
     private void loadLobbyLocation() {
         if (plugin.getConfig().contains("lobby.location")) {
-            this.lobbyLocation = plugin.getConfig().getLocation("lobby.location");
+            this.lobbyLocation = new Location(
+                    plugin.getServer().getWorld(plugin.getConfig().getString("lobby.location.world")),
+                    plugin.getConfig().getDouble("lobby.location.x"),
+                    plugin.getConfig().getDouble("lobby.location.y"),
+                    plugin.getConfig().getDouble("lobby.location.z"),
+                    (float) plugin.getConfig().getDouble("lobby.location.yaw"),
+                    (float) plugin.getConfig().getDouble("lobby.location.pitch")
+            );
         }
     }
 }

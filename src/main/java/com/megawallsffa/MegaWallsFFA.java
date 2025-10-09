@@ -1,16 +1,19 @@
 package com.megawallsffa;
 
 import com.megawallsffa.arena.ArenaManager;
-import com.megawallsffa.classes.ClassManager;
-import com.megawallsffa.classes.EnergyManager;
-import com.megawallsffa.commands.ArenaCommand;
+import com.megawallsffa.commands.KitCommand;
 import com.megawallsffa.commands.MegaWallsCommand;
-import com.megawallsffa.listeners.BlockBreakListener;
+import com.megawallsffa.commands.MegaWallsFFACommand;
+import com.megawallsffa.game.OreManager;
+import com.megawallsffa.kit.KitManager;
+import com.megawallsffa.listeners.DamageListener;
+import com.megawallsffa.listeners.DeathListener;
+import com.megawallsffa.listeners.GuiListener;
 import com.megawallsffa.listeners.LobbyItemListener;
-import com.megawallsffa.listeners.LobbyListener;
-import com.megawallsffa.listeners.PlayerDeathListener;
+import com.megawallsffa.listeners.PlayerListener;
 import com.megawallsffa.lobby.LobbyItemManager;
 import com.megawallsffa.lobby.LobbyManager;
+import com.megawallsffa.player.PlayerDataManager;
 import com.megawallsffa.player.PlayerManager;
 import com.megawallsffa.ui.MenuManager;
 import com.megawallsffa.ui.ScoreboardManager;
@@ -24,8 +27,9 @@ public final class MegaWallsFFA extends JavaPlugin {
     private ScoreboardManager scoreboardManager;
     private MenuManager menuManager;
     private LobbyItemManager lobbyItemManager;
-    private ClassManager classManager;
-    private EnergyManager energyManager;
+    private KitManager kitManager;
+    private PlayerDataManager playerDataManager;
+    private OreManager oreManager;
 
     @Override
     public void onEnable() {
@@ -39,19 +43,23 @@ public final class MegaWallsFFA extends JavaPlugin {
         scoreboardManager = new ScoreboardManager(this);
         menuManager = new MenuManager();
         lobbyItemManager = new LobbyItemManager();
-        classManager = new ClassManager();
-        energyManager = new EnergyManager(this);
+        kitManager = new KitManager(this);
+        kitManager.loadKits();
+        playerDataManager = new PlayerDataManager();
+        oreManager = new OreManager(this);
 
         // Register commands
-        getCommand("arena").setExecutor(new ArenaCommand(arenaManager));
         getCommand("megawalls").setExecutor(new MegaWallsCommand(this));
-        getCommand("class").setExecutor(new ClassCommand(this));
+        getCommand("mwffa").setExecutor(new MegaWallsFFACommand(this));
+        getCommand("kit").setExecutor(new KitCommand(this));
+
 
         // Register listeners
-        getServer().getPluginManager().registerEvents(new LobbyListener(this), this);
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         getServer().getPluginManager().registerEvents(new LobbyItemListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new DamageListener(this), this);
+        getServer().getPluginManager().registerEvents(new GuiListener(this), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(this), this);
 
         // Start tasks
         scoreboardManager.startUpdater();
@@ -90,11 +98,16 @@ public final class MegaWallsFFA extends JavaPlugin {
         return lobbyItemManager;
     }
 
-    public ClassManager getClassManager() {
-        return classManager;
+
+    public KitManager getKitManager() {
+        return kitManager;
     }
 
-    public EnergyManager getEnergyManager() {
-        return energyManager;
+    public PlayerDataManager getPlayerDataManager() {
+        return playerDataManager;
+    }
+
+    public OreManager getOreManager() {
+        return oreManager;
     }
 }

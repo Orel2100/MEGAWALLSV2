@@ -22,7 +22,8 @@ public class ScoreboardManager {
 
     public void setScoreboard(Player player) {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective objective = board.registerNewObjective("MegaWallsFFA", "dummy", ChatColor.YELLOW + "" + ChatColor.BOLD + "MEGA WALLS");
+        Objective objective = board.registerNewObjective("MegaWallsFFA", "dummy");
+        objective.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "MEGA WALLS");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         // Setup static and dynamic lines using teams

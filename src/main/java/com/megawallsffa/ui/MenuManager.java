@@ -16,7 +16,7 @@ public class MenuManager {
         Inventory inv = Bukkit.createInventory(null, 27, ChatColor.DARK_GRAY + "Class Selector");
 
         // Placeholder for class items
-        ItemStack placeholder = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
         ItemMeta meta = placeholder.getItemMeta();
         meta.setDisplayName(ChatColor.RED + "Coming Soon!");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + "This class is not yet available."));
@@ -33,7 +33,7 @@ public class MenuManager {
         Inventory inv = Bukkit.createInventory(null, 27, ChatColor.DARK_GRAY + "Shop");
 
         // Placeholder for shop categories
-        ItemStack placeholder = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
         ItemMeta meta = placeholder.getItemMeta();
         meta.setDisplayName(ChatColor.RED + "Coming Soon!");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + "This shop category is not yet available."));

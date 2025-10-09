@@ -1,53 +1,50 @@
 package com.megawallsffa.player;
 
-import com.megawallsffa.classes.MegaWallsClass;
+import com.megawallsffa.kit.Kit;
 
 import java.util.UUID;
 
 public class PlayerData {
 
     private final UUID uuid;
+    private Kit kit;
+    private int energy;
     private int coins;
-    private int kills;
-    private int deaths;
-    private int killStreak;
-    private MegaWallsClass selectedClass;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
+        this.energy = 0;
         this.coins = 0;
-        this.kills = 0;
-        this.deaths = 0;
-        this.killStreak = 0;
-        this.selectedClass = null; // Default to no class
     }
 
-    // Getters
     public UUID getUuid() {
         return uuid;
+    }
+
+    public Kit getKit() {
+        return kit;
+    }
+
+    public void setKit(Kit kit) {
+        this.kit = kit;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    public void addEnergy(int amount) {
+        this.energy = Math.min(100, this.energy + amount);
     }
 
     public int getCoins() {
         return coins;
     }
 
-    public int getKills() {
-        return kills;
-    }
-
-    public int getDeaths() {
-        return deaths;
-    }
-
-    public int getKillStreak() {
-        return killStreak;
-    }
-
-    public MegaWallsClass getSelectedClass() {
-        return selectedClass;
-    }
-
-    // Setters
     public void setCoins(int coins) {
         this.coins = coins;
     }
@@ -56,28 +53,15 @@ public class PlayerData {
         this.coins += amount;
     }
 
-    public void setKills(int kills) {
-        this.kills = kills;
+    public int getKills() {
+        return 0;
     }
 
-    public void incrementKills() {
-        this.kills++;
-        this.killStreak++;
+    public int getDeaths() {
+        return 0;
     }
 
-    public void setDeaths(int deaths) {
-        this.deaths = deaths;
-    }
-
-    public void incrementDeaths() {
-        this.deaths++;
-    }
-
-    public void resetKillStreak() {
-        this.killStreak = 0;
-    }
-
-    public void setSelectedClass(MegaWallsClass selectedClass) {
-        this.selectedClass = selectedClass;
+    public int getKillStreak() {
+        return 0;
     }
 }

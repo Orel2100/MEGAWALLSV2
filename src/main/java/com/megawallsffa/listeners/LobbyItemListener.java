@@ -30,7 +30,7 @@ public class LobbyItemListener implements Listener {
         }
 
         Player player = event.getPlayer();
-        ItemStack item = player.getInventory().getItemInMainHand();
+        ItemStack item = player.getItemInHand();
 
         // Only works in the lobby
         if (lobbyManager.getLobbyLocation() == null || !player.getWorld().equals(lobbyManager.getLobbyLocation().getWorld())) {

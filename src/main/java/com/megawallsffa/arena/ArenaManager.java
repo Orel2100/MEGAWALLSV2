@@ -83,10 +83,20 @@ public class ArenaManager {
         plugin.saveDefaultConfig(); // Ensures config.yml exists
 
         if (config.contains("arena.pos1")) {
-            pos1 = config.getLocation("arena.pos1");
+            pos1 = new Location(
+                    plugin.getServer().getWorld(config.getString("arena.pos1.world")),
+                    config.getDouble("arena.pos1.x"),
+                    config.getDouble("arena.pos1.y"),
+                    config.getDouble("arena.pos1.z")
+            );
         }
         if (config.contains("arena.pos2")) {
-            pos2 = config.getLocation("arena.pos2");
+            pos2 = new Location(
+                    plugin.getServer().getWorld(config.getString("arena.pos2.world")),
+                    config.getDouble("arena.pos2.x"),
+                    config.getDouble("arena.pos2.y"),
+                    config.getDouble("arena.pos2.z")
+            );
         }
         if (config.contains("arena.spawns")) {
             // Bukkit's config API saves a list of locations directly
